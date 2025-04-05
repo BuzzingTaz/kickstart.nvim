@@ -16,28 +16,19 @@ return {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
-
-      require('mini.icons').setup()
-      require('mini.git').setup()
-      require('mini.diff').setup()
-
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      statusline.setup {
-        use_icons = vim.g.have_nerd_font,
+      require('mini.icons').setup {
+        file = {
+          ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+          ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
+          ['.prettierrc'] = { glyph = '', hl = 'MiniIconsPurple' },
+          ['.yarnrc.yml'] = { glyph = '', hl = 'MiniIconsBlue' },
+          ['eslint.config.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+          ['package.json'] = { glyph = '', hl = 'MiniIconsGreen' },
+          ['tsconfig.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+          ['tsconfig.build.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+          ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
+        },
       }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
-      --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
 }

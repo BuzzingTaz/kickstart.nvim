@@ -43,12 +43,13 @@ return {
         },
         pickers = {},
         extensions = {
+          fzf = {},
           ['ui-select'] = {
             require('telescope.themes').get_dropdown {
               winblend = 10,
             },
           },
-          ['zoxide'] = {
+          zoxide = {
             prompt_title = '[ Walking on the shoulders of TJ ]',
             mappings = {
               default = {
@@ -69,7 +70,7 @@ return {
               ['<C-q>'] = { action = z_utils.create_basic_command 'split' },
             },
           },
-          ['themes'] = {
+          themes = {
             layout_config = {
               horizontal = {
                 width = 0.8,
@@ -106,19 +107,25 @@ return {
       vim.keymap.set('n', '<leader>fw', function()
         pickers.prettyGrepPicker { picker = 'grep_string' }
       end, { desc = '[F]ind current [W]ord' })
+
       vim.keymap.set('n', '<leader>fg', function()
         pickers.prettyGrepPicker { picker = 'live_grep' }
       end, { desc = '[F]ind by [G]rep' })
+
       vim.keymap.set('n', '<leader>ff', function()
         pickers.prettyFilesPicker { picker = 'find_files' }
       end, { desc = '[F]ind [F]iles' })
+
       vim.keymap.set('n', '<leader>f.', function()
         pickers.prettyFilesPicker { picker = 'oldfiles' }
       end, { desc = '[F]ind Recent Files ("." for repeat)' })
+
       vim.keymap.set('n', '<leader><leader>', pickers.prettyBuffersPicker, { desc = '[ ] Find existing buffers' })
+
       vim.keymap.set('n', '<leader>fs', function()
         pickers.prettyDocumentSymbols()
       end, { desc = '[s] Find Document Symbols' })
+
       vim.keymap.set('n', '<leader>ws', function()
         pickers.prettyWorkspaceSymbols()
       end, { desc = '[s] Find workspace symbols' })
@@ -130,17 +137,17 @@ return {
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
-      vim.keymap.set('n', '<leader>s/', function()
+      vim.keymap.set('n', '<leader>f/', function()
         builtin.live_grep {
           grep_open_files = true,
           prompt_title = 'Live Grep in Open Files',
         }
-      end, { desc = '[S]earch [/] in Open Files' })
+      end, { desc = '[F]ind [/] in Open Files' })
 
       -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>sn', function()
+      vim.keymap.set('n', '<leader>fn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[S]earch [N]eovim files' })
+      end, { desc = '[F]ind [N]eovim files' })
 
       -- Extension keybinds
       vim.keymap.set('n', '<leader>cd', require('telescope').extensions.zoxide.list)

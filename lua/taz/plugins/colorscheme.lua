@@ -1,4 +1,4 @@
-local catpucccin_overrides = {
+local catppucccin_overrides = {
   ['vscode_pastel'] = {
     color_overrides = {
       mocha = {
@@ -28,6 +28,7 @@ local catpucccin_overrides = {
           IncSearch = { bg = colors.sky },
           CursorLineNr = { fg = colors.blue, style = { 'bold' } },
           DashboardFooter = { fg = colors.overlay0 },
+          TreesitterContext = { bg = colors.overlay0, style = { 'italic' } },
           TreesitterContextBottom = { style = {} },
           WinSeparator = { fg = colors.overlay0, style = { 'bold' } },
           ['@markup.italic'] = { fg = colors.blue, style = { 'italic' } },
@@ -73,34 +74,23 @@ local catpucccin_overrides = {
         surface2 = '#3A3D4A',
         surface1 = '#2F313D',
         surface0 = '#1D1E29',
-        base = '#0b0b12',
+        base = '#101218',
         mantle = '#11111a',
         crust = '#191926',
       },
     },
     integrations = {
-      telescope = {
-        enabled = true,
-        style = 'nvchad',
-      },
+      blink_cmp = true,
+      fidget = true,
+      harpoon = true,
+      mason = true,
+      copilot_vim = true,
+      which_key = true,
     },
   },
 }
 
-choices = { -- colorscheme.
-  {
-    'nuvic/flexoki-nvim',
-    name = 'flexoki',
-    priority = 1000,
-    config = function()
-      require('flexoki').setup {
-        variant = 'moon',
-        enable = {
-          terminal = true,
-        },
-      }
-    end,
-  },
+local choices = { -- colorscheme.
   {
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -117,21 +107,12 @@ choices = { -- colorscheme.
     name = 'catppuccin',
     priority = 1000,
     config = function()
-      local opts = { transparent_background = true, show_end_of_buffer = true }
-      local overrides = catpucccin_overrides['pretty']
+      local opts = { transparent_background = true, show_end_of_buffer = true, term_colors = true }
+      local overrides = catppucccin_overrides['pretty']
       for k, v in pairs(overrides) do
         opts[k] = v
       end
       require('catppuccin').setup(opts)
-    end,
-  },
-  {
-    'vague2k/vague.nvim',
-    config = function()
-      -- NOTE: you do not need to call setup if you don't want to.
-      require('vague').setup {
-        transparent = true,
-      }
     end,
   },
   {
@@ -153,12 +134,14 @@ choices = { -- colorscheme.
     'Mofiqul/vscode.nvim',
     name = 'vscode-theme',
     config = function()
+      local c = require('vscode.colors').get_colors()
       require('vscode').setup {
         transparent = true,
         underline_links = true,
+        terminal_colors = true,
       }
     end,
   },
 }
 
-return choices
+return choices[4]

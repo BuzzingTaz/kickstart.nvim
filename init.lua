@@ -43,13 +43,17 @@ local plugins = {
   require 'taz.plugins.fterm',
   require 'taz.plugins.nekifoch',
   require 'taz.plugins.incline',
-  require 'taz.plugins.neoscroll',
   require 'taz.plugins.confirm-quit',
   require 'taz.plugins.ufo',
   require 'taz.plugins.harpoon',
   require 'taz.plugins.auto-session',
-  -- require 'taz.plugins.lualine',
+  require 'taz.plugins.lualine',
   require 'taz.plugins.lazygit',
+  require 'taz.plugins.lsp_signatures',
+  require 'taz.plugins.ts-autotag',
+  require 'taz.plugins.remote-nvim',
+  require 'taz.plugins.comment',
+  require 'taz.plugins.git-conflicts',
 }
 
 require('lazy').setup(plugins, {
