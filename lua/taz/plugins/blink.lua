@@ -2,6 +2,7 @@ return {
   {
     'saghen/blink.nvim',
     -- all modules handle lazy loading internally
+    enabled = false,
     lazy = false,
     dependencies = {
       {

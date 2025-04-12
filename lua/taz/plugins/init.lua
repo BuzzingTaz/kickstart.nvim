@@ -2,4 +2,7 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+}

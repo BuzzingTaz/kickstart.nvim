@@ -138,8 +138,15 @@ local cmp_options = {
     },
     {
       'saghen/blink.cmp',
+      event = 'VimEnter',
       -- optional: provides snippets for the snippet source
-      dependencies = { 'rafamadriz/friendly-snippets', { 'L3MON4D3/LuaSnip', version = 'v2.*' }, 'echasnovski/mini.snippets', 'fang2hou/blink-copilot' },
+      dependencies = {
+        'rafamadriz/friendly-snippets',
+        { 'L3MON4D3/LuaSnip', version = 'v2.*', opts = {} },
+        'echasnovski/mini.snippets',
+        'fang2hou/blink-copilot',
+        'folke/lazydev.nvim',
+      },
 
       -- use a release tag to download pre-built binaries
       version = '*',
@@ -149,7 +156,7 @@ local cmp_options = {
       opts = {
         completion = {
           menu = { border = 'single' },
-          documentation = { window = { border = 'single' } },
+          documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = 'single' } },
         },
         signature = { enabled = true, window = { border = 'single' } },
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
@@ -179,6 +186,7 @@ local cmp_options = {
         sources = {
           default = { 'lsp', 'path', 'snippets', 'buffer' },
           providers = {
+            lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
             copilot = {
               name = 'copilot',
               module = 'blink-copilot',
@@ -187,6 +195,8 @@ local cmp_options = {
             },
           },
         },
+
+        snippets = { preset = 'luasnip' },
         -- Blink.cmp uses a Rust fuzzy matcher by default for typo resistance and significantly better performance
         -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
         -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`

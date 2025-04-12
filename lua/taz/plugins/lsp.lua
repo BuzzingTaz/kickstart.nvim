@@ -58,8 +58,12 @@ return {
           map('<leader>vds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
           map('<leader>vws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
           map('<leader>vrn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>vrr', vim.lsp.buf.references, '[R]eferences')
           map('<leader>vca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          map('<leader>vcd', vim.diagnostic.open_float, '[C]ode [D]iagnostic')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
 
           -- [[ Highlighting ]]--
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
@@ -68,11 +72,7 @@ return {
           ---@param bufnr? integer some lsp support methods only in specific files
           ---@return boolean
           local function client_supports_method(client, method, bufnr)
-            if vim.fn.has 'nvim-0.11' == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
+            return client:supports_method(method, bufnr)
           end
 
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
@@ -216,6 +216,15 @@ return {
                 shadow = true,
               },
               staticcheck = true,
+            },
+          },
+        },
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pyflakes = { enabled = false },
+              },
             },
           },
         },

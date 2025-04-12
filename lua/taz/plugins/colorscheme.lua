@@ -144,4 +144,4 @@ local choices = { -- colorscheme.
   },
 }
 
-return choices[4]
+return choices
