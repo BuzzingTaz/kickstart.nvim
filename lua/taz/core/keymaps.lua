@@ -21,3 +21,8 @@ vim.keymap.set('n', 'n', 'nzz', { noremap = true })
 vim.keymap.set('n', 'N', 'Nzz', { noremap = true })
 
 vim.keymap.set('x', '<leader>p', '"_dP', { noremap = true, silent = true, desc = 'Paste without yanking' })
+
+vim.keymap.set('n', '<up>', '<C-w>k', { noremap = true, desc = 'Move window up' })
+vim.keymap.set('n', '<down>', '<C-w>j', { noremap = true, desc = 'Move window up' })
+vim.keymap.set('n', '<left>', '<C-w>h', { noremap = true, desc = 'Move window up' })
+vim.keymap.set('n', '<right>', '<C-w>l', { noremap = true, desc = 'Move window up' })
