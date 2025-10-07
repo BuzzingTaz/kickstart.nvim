@@ -96,7 +96,7 @@ local choices = { -- colorscheme.
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       require('tokyonight').setup {
-        transparent = true,
+        transparent = false,
       }
       -- Load the colorscheme here.
       vim.cmd.colorscheme 'tokyonight-night'
@@ -107,7 +107,7 @@ local choices = { -- colorscheme.
     name = 'catppuccin',
     priority = 1000,
     config = function()
-      local opts = { transparent_background = true, show_end_of_buffer = true, term_colors = true }
+      local opts = { transparent_background = false, show_end_of_buffer = true, term_colors = true }
       local overrides = catppucccin_overrides['pretty']
       for k, v in pairs(overrides) do
         opts[k] = v
@@ -116,27 +116,12 @@ local choices = { -- colorscheme.
     end,
   },
   {
-    'projekt0n/github-nvim-theme',
-    name = 'github-theme',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      require('github-theme').setup {
-        options = {
-          transparent = true,
-        },
-      }
-
-      -- vim.cmd 'colorscheme github_dark'
-    end,
-  },
-  {
     'Mofiqul/vscode.nvim',
     name = 'vscode-theme',
     config = function()
       local c = require('vscode.colors').get_colors()
       require('vscode').setup {
-        transparent = true,
+        transparent = false,
         underline_links = true,
         terminal_colors = true,
       }

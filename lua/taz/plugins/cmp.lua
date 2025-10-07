@@ -119,24 +119,6 @@ local cmp_options = {
   },
   blink_cmp = {
     {
-      'github/copilot.vim',
-      cmd = 'Copilot',
-      event = 'BufWinEnter',
-      -- init = function()
-      --   vim.g.copilot_no_maps = true
-      -- end,
-      -- config = function()
-      --   -- Block the normal Copilot suggestions
-      --   vim.api.nvim_create_augroup('github_copilot', { clear = true })
-      --   vim.api.nvim_create_autocmd({ 'FileType', 'BufUnload', 'BufEnter' }, {
-      --     group = 'github_copilot',
-      --     callback = function(args)
-      --       vim.fn['copilot#On' .. args.event]()
-      --     end,
-      -- })
-      -- end,
-    },
-    {
       'saghen/blink.cmp',
       event = 'VimEnter',
       -- optional: provides snippets for the snippet source
@@ -158,7 +140,7 @@ local cmp_options = {
           menu = { border = 'single' },
           documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = 'single' } },
         },
-        signature = { enabled = true, window = { border = 'single' } },
+        signature = { enabled = disable, window = { border = 'single' } },
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
         -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
         -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -171,7 +153,8 @@ local cmp_options = {
         -- See the full "keymap" documentation for information on defining your own keymap.
         keymap = {
           preset = 'default',
-          ['<C-space>'] = { 'show' },
+          ['<C-space>'] = false,
+          ['<C-s>'] = { 'show', 'show_documentation', 'hide_documentation' },
           ['<C-e>'] = {},
         },
 

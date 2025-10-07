@@ -54,13 +54,13 @@ return {
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>vD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>vds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          map('<leader>vws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          map('<leader>vrn', vim.lsp.buf.rename, '[R]e[n]ame')
-          map('<leader>vrr', vim.lsp.buf.references, '[R]eferences')
-          map('<leader>vca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-          map('<leader>vcd', vim.diagnostic.open_float, '[C]ode [D]iagnostic')
+          map('<leader>lD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('<leader>ls', require('telescope.builtin').lsp_document_symbols, 'document [S]ymbols')
+          map('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
+          map('<leader>lR', vim.lsp.buf.references, '[R]eferences')
+          map('<leader>la', vim.lsp.buf.code_action, 'code [A]ction', { 'n', 'x' })
+          map('<leader>lk', vim.diagnostic.open_float, 'code [D]iagnostic')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
@@ -173,6 +173,7 @@ return {
             completeUnimported = true,
             clangdFileStatus = true,
           },
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'def' },
         },
         lua_ls = {
           -- cmd = { ... },
@@ -226,6 +227,12 @@ return {
                 pyflakes = { enabled = false },
               },
             },
+          },
+        },
+        eslint = {
+          settings = {
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectories = { mode = 'auto' },
           },
         },
       }
