@@ -138,19 +138,9 @@ local cmp_options = {
       opts = {
         completion = {
           menu = { border = 'single' },
-          documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = 'single' } },
+          documentation = { auto_show = true, auto_show_delay_ms = 100, window = { border = 'single' } },
         },
-        signature = { enabled = disable, window = { border = 'single' } },
-        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept, C-n/C-p for up/down)
-        -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys for up/down)
-        -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-        --
-        -- All presets have the following mappings:
-        -- C-space: Open menu or open docs if already open
-        -- C-e: Hide menu
-        -- C-k: Toggle signature help
-        --
-        -- See the full "keymap" documentation for information on defining your own keymap.
+        signature = { enabled = true, window = { border = 'single' } },
         keymap = {
           preset = 'default',
           ['<C-space>'] = false,
