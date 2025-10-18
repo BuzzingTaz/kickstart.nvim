@@ -5,8 +5,8 @@ return {
     config = function()
       require('lualine').setup {
         options = {
-          section_separators = { left = '', right = '' },
-          component_separators = { left = '|', right = '|' },
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' },
           theme = 'ayu_dark',
         },
         tabline = {
@@ -15,7 +15,7 @@ return {
           lualine_c = {},
           lualine_x = {},
           lualine_y = {},
-          lualine_z = { 'tabs' },
+          lualine_z = { { 'lsp_status', ignore_lsp = { 'null-ls', 'GitHub Copilot' } } },
         },
         sections = {
           lualine_c = { { 'filename', path = 1 } },
