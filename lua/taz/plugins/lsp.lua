@@ -34,8 +34,8 @@ return {
 
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
+      { 'mason-org/mason.nvim', config = true },
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       'saghen/blink.cmp',
@@ -52,18 +52,17 @@ return {
 
           -- [[ Keymaps ]]--
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>lD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>ls', require('telescope.builtin').lsp_document_symbols, 'document [S]ymbols')
-          map('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
-          map('<leader>lR', vim.lsp.buf.references, '[R]eferences')
-          map('<leader>la', vim.lsp.buf.code_action, 'code [A]ction', { 'n', 'x' })
+          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('grt', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gO', require('telescope.builtin').lsp_document_symbols, 'document [S]ymbols')
+          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('grn', vim.lsp.buf.rename, '[R]ename')
+          map('gra', vim.lsp.buf.code_action, 'code [A]ction', { 'n', 'x' })
           map('<leader>lk', vim.diagnostic.open_float, 'code [D]iagnostic')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
+          map('<C-k>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
 
           -- [[ Highlighting ]]--
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)

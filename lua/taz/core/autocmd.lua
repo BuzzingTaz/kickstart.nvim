@@ -8,7 +8,7 @@ autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = yankGroup,
   callback = function()
-    vim.highlight.on_yank {
+    vim.hl.on_yank {
       'IncSearch',
       { timeout = 50 },
       { on_visual = true, on_macro = true, on_yank = true },

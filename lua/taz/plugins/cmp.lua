@@ -124,10 +124,10 @@ local cmp_options = {
       -- optional: provides snippets for the snippet source
       dependencies = {
         'rafamadriz/friendly-snippets',
-        { 'L3MON4D3/LuaSnip', version = 'v2.*', opts = {} },
         'echasnovski/mini.snippets',
         'fang2hou/blink-copilot',
         'folke/lazydev.nvim',
+        { 'L3MON4D3/LuaSnip', version = 'v2.*', opts = {} },
       },
 
       -- use a release tag to download pre-built binaries
