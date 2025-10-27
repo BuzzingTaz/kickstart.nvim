@@ -7,11 +7,11 @@ return {
     },
 
     init = function()
-      vim.keymap.set('n', '<leader>st', '<cmd>SessionToggleAutoSave<cr>', { desc = 'Session | Toggle', silent = true })
-      vim.keymap.set('n', '<leader>sS', '<cmd>SessionSearch<cr>', { desc = 'Session | Search', silent = true })
-      vim.keymap.set('n', '<leader>sd', '<cmd>SessionDelete<cr>', { desc = 'Session | Delete', silent = true })
-      vim.keymap.set('n', '<leader>sr', '<cmd>SessionRestore<cr>', { desc = 'Session | Restore', silent = true })
-      vim.keymap.set('n', '<leader>ss', '<cmd>SessionSave<cr>', { desc = 'Session | Save', silent = true })
+      vim.keymap.set('n', '<leader>St', '<cmd>SessionToggleAutoSave<cr>', { desc = 'Session | Toggle', silent = true })
+      vim.keymap.set('n', '<leader>SS', '<cmd>SessionSearch<cr>', { desc = 'Session | Search', silent = true })
+      vim.keymap.set('n', '<leader>Sd', '<cmd>SessionDelete<cr>', { desc = 'Session | Delete', silent = true })
+      vim.keymap.set('n', '<leader>Sr', '<cmd>SessionRestore<cr>', { desc = 'Session | Restore', silent = true })
+      vim.keymap.set('n', '<leader>Ss', '<cmd>SessionSave<cr>', { desc = 'Session | Save', silent = true })
     end,
 
     ---enables autocomplete for opts

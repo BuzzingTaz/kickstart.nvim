@@ -3,6 +3,7 @@ return {
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
+      preset = "modern",
       delay = 0,
       icons = {
         mappings = vim.g.have_nerd_font,
@@ -40,14 +41,15 @@ return {
 
       -- Document existing key chains
       spec = {
-        { '<leader>v', group = 'LSP', mode = { 'n', 'x' } },
-        { '<leader>d', group = '[D]ocument' },
-        { '<leader>s', group = '[S]ession' },
-        { '<leader>r', group = '[R]ename' },
+        { 'gl', group = '[L]SP', mode = { 'n', 'x' } },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>S', group = '[S]ession' },
         { '<leader>f', group = '[F]ind' },
+        { '<leader>g', group = '[G]it' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>m', group = '[M]isc' },
+        { '<leader>x', group = 'Trouble' },
       },
     },
     keys = {

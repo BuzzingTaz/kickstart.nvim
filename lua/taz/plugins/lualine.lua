@@ -5,8 +5,8 @@ return {
     config = function()
       require('lualine').setup {
         options = {
-          section_separators = { left = '', right = '' },
-          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '|', right = '|' },
           theme = 'ayu_dark',
         },
         tabline = {

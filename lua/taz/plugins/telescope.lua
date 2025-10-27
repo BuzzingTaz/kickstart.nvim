@@ -32,9 +32,6 @@ return {
       local oil = require 'oil'
       local z_utils = require 'telescope._extensions.zoxide.utils'
       require('telescope').setup {
-        -- You can put your default mappings / updates / etc. in here
-        --  All the info you're looking for is in `:help telescope.setup()`
-        --
         defaults = {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
@@ -99,7 +96,6 @@ return {
       local builtin = require 'telescope.builtin'
       local pickers = require 'taz.pickers.telescopePickers'
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
       vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind [T]elescope' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
@@ -121,13 +117,13 @@ return {
 
       vim.keymap.set('n', '<leader><leader>', pickers.prettyBuffersPicker, { desc = '[ ] Find existing buffers' })
 
-      vim.keymap.set('n', '<leader>fs', function()
+      vim.keymap.set('n', '<leader>sO', function()
         pickers.prettyDocumentSymbols()
-      end, { desc = '[s] Find Document Symbols' })
+      end, { desc = 'Find Document Symbols' })
 
-      vim.keymap.set('n', '<leader>ws', function()
+      vim.keymap.set('n', '<leader>sW', function()
         pickers.prettyWorkspaceSymbols()
-      end, { desc = '[s] Find workspace symbols' })
+      end, { desc = 'Find workspace symbols' })
 
       vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -143,14 +139,39 @@ return {
         }
       end, { desc = '[F]ind [/] in Open Files' })
 
-      -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>fn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[F]ind [N]eovim files' })
+      -- Some keybinds from LazyVim
 
       -- Extension keybinds
       vim.keymap.set('n', '<leader>cd', require('telescope').extensions.zoxide.list)
-      vim.keymap.set('n', '<leader>kt', ':Telescope themes<CR>', { noremap = true, silent = true, desc = 'Theme Switcher' })
+      vim.keymap.set('n', '<leader>kt', '<cmd>Telescope themes<CR>', { noremap = true, silent = true, desc = 'Theme Switcher' })
     end,
+    keys = {
+      -- Some keybinds from LazyVim
+      {
+        '<leader>,',
+        '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
+        desc = 'Switch Buffer',
+      },
+      { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command History' },
+      { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'Commits' },
+      { '<leader>gs', '<cmd>Telescope git_status<CR>', desc = 'Status' },
+      { '<leader>s"', '<cmd>Telescope registers<cr>', desc = 'Registers' },
+      { '<leader>s/', '<cmd>Telescope search_history<cr>', desc = 'Search History' },
+      { '<leader>sa', '<cmd>Telescope autocommands<cr>', desc = 'Auto Commands' },
+      { '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = 'Buffer Lines' },
+      { '<leader>sc', '<cmd>Telescope command_history<cr>', desc = 'Command History' },
+      { '<leader>sC', '<cmd>Telescope commands<cr>', desc = 'Commands' },
+      { '<leader>sd', '<cmd>Telescope diagnostics<cr>', desc = 'Diagnostics' },
+      { '<leader>sD', '<cmd>Telescope diagnostics bufnr=0<cr>', desc = 'Buffer Diagnostics' },
+      { '<leader>sh', '<cmd>Telescope help_tags<cr>', desc = 'Help Pages' },
+      { '<leader>sH', '<cmd>Telescope highlights<cr>', desc = 'Search Highlight Groups' },
+      { '<leader>sj', '<cmd>Telescope jumplist<cr>', desc = 'Jumplist' },
+      { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Key Maps' },
+      { '<leader>sl', '<cmd>Telescope loclist<cr>', desc = 'Location List' },
+      { '<leader>sM', '<cmd>Telescope man_pages<cr>', desc = 'Man Pages' },
+      { '<leader>sm', '<cmd>Telescope marks<cr>', desc = 'Jump to Mark' },
+      { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Options' },
+      { '<leader>sq', '<cmd>Telescope quickfix<cr>', desc = 'Quickfix List' },
+    },
   },
 }
