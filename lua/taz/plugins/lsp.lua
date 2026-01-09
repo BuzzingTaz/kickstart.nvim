@@ -30,13 +30,19 @@ return {
       },
     },
   },
+  {
+    'mason-org/mason-lspconfig.nvim',
+    dependencies = {
+      { 'mason-org/mason.nvim', opts = {} },
+      'neovim/nvim-lspconfig',
+    },
+    opts = {
+      ensure_installed = { 'clangd', 'lua_ls', 'neocmake', 'gopls', 'pylsp', 'eslint', 'stylua' },
+    },
+  },
   { -- Main LSP Configuration
-
     'neovim/nvim-lspconfig',
     dependencies = {
-      { 'mason-org/mason.nvim', config = true },
-      'mason-org/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
       'saghen/blink.cmp',
     },
@@ -139,19 +145,6 @@ return {
       -- LSP Mason config
       local servers = {
         clangd = {
-          root_dir = function(fname)
-            return require('lspconfig.util').root_pattern(
-              'Makefile',
-              'configure.ac',
-              'configure.in',
-              'config.h.in',
-              'meson.build',
-              'meson_options.txt',
-              'build.ninja'
-            )(fname) or require('lspconfig.util').root_pattern('compile_commands.json', 'compile_flags.txt')(fname) or require('lspconfig.util').find_git_ancestor(
-              fname
-            )
-          end,
           capabilities = {
             offsetEncoding = { 'utf-16', 'utf-8' },
           },
@@ -232,26 +225,20 @@ return {
             workingDirectories = { mode = 'auto' },
           },
         },
-      }
-
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      -- Setting up specific setups in servers
-      require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = require('blink.cmp').get_lsp_capabilities(server.capabilities)
-            require('lspconfig')[server_name].setup(server)
-          end,
+        verible = {
+          cmd = { 'verible-verilog-ls', '--rules_config', '/home/taz/.config/verible/.rules.verible_lint' },
         },
       }
+
+      for server_name, server in pairs(servers) do
+        vim.lsp.config(server_name, server)
+      end
+
+      vim.lsp.config('*', {
+        capabilities = require('blink.cmp').get_lsp_capabilities(),
+      })
+
+      vim.lsp.config('verible', servers.verible)
     end,
   },
 }
