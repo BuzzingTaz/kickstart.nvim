@@ -66,20 +66,12 @@ return {
           map('glk', vim.diagnostic.open_float, 'code Diagnostic')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('<C-k>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
+          map('<C-space>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
 
           -- [[ Highlighting ]]--
-          -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-          ---@param client vim.lsp.Client
-          ---@param method vim.lsp.protocol.Method
-          ---@param bufnr? integer some lsp support methods only in specific files
-          ---@return boolean
-          local function client_supports_method(client, method, bufnr)
-            return client:supports_method(method, bufnr)
-          end
-
+          -- Highlights hovered symbol
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -90,21 +82,19 @@ return {
             vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
               buffer = event.buf,
               group = highlight_augroup,
-              callback = vim.g.vscode and function() end or vim.lsp.buf.clear_references,
+              callback = vim.lsp.buf.clear_references,
             })
 
             vim.api.nvim_create_autocmd('LspDetach', {
               group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
               callback = function(event2)
-                if not vim.g.vscode then
-                  vim.lsp.buf.clear_references()
-                end
+                vim.lsp.buf.clear_references()
                 vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
               end,
             })
           end
 
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
             vim.lsp.inlay_hint.enable(true)
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
@@ -165,25 +155,7 @@ return {
           },
           filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'def' },
         },
-        lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
         neocmake = {
-          cmd = { 'neocmakelsp', '--stdio' },
-          filetypes = { 'cmake' },
-          root_dir = function(fname)
-            return require('lspconfig').util.find_git_ancestor(fname)
-          end,
           -- single_file_support = true, -- suggested
           init_options = {
             format = {
@@ -192,13 +164,9 @@ return {
             lint = {
               enable = true,
             },
-            scan_cmake_in_package = true, -- default is true
           },
         },
         gopls = {
-          cmd = { 'gopls', 'serve' },
-          filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-          root_dir = require('lspconfig').util.root_pattern('go.work', 'go.mod', '.git'),
           settings = {
             gopls = {
               completeUnimported = true,
@@ -219,26 +187,19 @@ return {
             },
           },
         },
-        eslint = {
-          settings = {
-            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-            workingDirectories = { mode = 'auto' },
-          },
-        },
         verible = {
           cmd = { 'verible-verilog-ls', '--rules_config', '/home/taz/.config/verible/.rules.verible_lint' },
         },
       }
 
-      for server_name, server in pairs(servers) do
-        vim.lsp.config(server_name, server)
-      end
-
       vim.lsp.config('*', {
         capabilities = require('blink.cmp').get_lsp_capabilities(),
       })
 
-      vim.lsp.config('verible', servers.verible)
+      for server_name, server in pairs(servers) do
+        vim.lsp.config(server_name, server)
+      end
+
     end,
   },
 }
