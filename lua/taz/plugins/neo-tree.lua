@@ -13,10 +13,12 @@ return {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
+    close_if_last_window = true,
     filesystem = {
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ["<space>"] = { "toggle_node", nowait = true },
         },
       },
     },

@@ -28,3 +28,12 @@ autocmd('FileType', {
   pattern = { 'help', 'man' },
   command = 'wincmd L',
 })
+
+autocmd('FileType', {
+  desc = 'Disable tab characters in go files specifically',
+  group = augroup('GoNoTab', {clear = true}),
+  pattern = "go",
+  callback = function()
+    vim.opt.list = false
+  end
+})
