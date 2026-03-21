@@ -3,9 +3,9 @@
 
 return {
   'windwp/nvim-autopairs',
-  enabled=false,
+  enabled=true,
   event = 'InsertEnter',
   opts = {
-    map_bs = true,
+    map_bs = false,
   },
 }
