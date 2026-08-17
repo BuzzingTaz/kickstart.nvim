@@ -43,7 +43,7 @@ vim.o.updatetime = 50
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.o.timeoutlen = 1000
+vim.o.timeoutlen = 300
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
@@ -73,3 +73,5 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
+vim.o.termguicolors = true
