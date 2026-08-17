@@ -25,6 +25,7 @@ return {
           lualine_b = { 'diagnostics' },
           lualine_c = { { 'filename', path = 1 } },
         },
+        extensions = { 'fzf', 'lazy', 'man', 'mason', 'oil', 'neo-tree', 'quickfix', 'trouble' },
       }
     end,
   },
