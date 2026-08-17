@@ -7,7 +7,7 @@ return {
         options = {
           section_separators = { left = '', right = '' },
           component_separators = { left = '|', right = '|' },
-          theme = 'ayu_dark',
+          theme = 'ayu_mirage',
         },
         tabline = {
           lualine_a = { 'buffers' },
@@ -19,6 +19,7 @@ return {
         },
         sections = {
           lualine_c = { { 'filename', path = 1 } },
+          lualine_y = { 'selectioncount', 'progress' },
         },
         inactive_sections = {
           lualine_b = { 'diagnostics' },
