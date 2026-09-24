@@ -59,15 +59,17 @@ return {
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
           -- [[ Keymaps ]]--
-          -- Override default keymaps with telescope
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('grt', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          -- Override default keymaps with snacks pickers
+          map('gd', function() Snacks.picker.lsp_definitions() end, '[G]oto [D]efinition')
+          map('grr', function() Snacks.picker.lsp_references() end, '[G]oto [R]eferences')
+          map('gri', function() Snacks.picker.lsp_implementations() end, '[G]oto [I]mplementation')
+          map('grt', function() Snacks.picker.lsp_type_definitions() end, 'Type [D]efinition')
           -- map('grn', vim.lsp.buf.rename, '[R]ename')
           -- map('gra', vim.lsp.buf.code_action, 'code [A]ction', { 'n', 'x' })
           map('grk', vim.diagnostic.open_float, 'code Diagnostic')
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('gD', function() Snacks.picker.lsp_declarations() end, '[G]oto [D]eclaration')
+          map('gai', function() Snacks.picker.lsp_incoming_calls() end, 'C[a]lls Incoming')
+          map('gao', function() Snacks.picker.lsp_outgoing_calls() end, 'C[a]lls Outgoing')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('<C-S-space>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
 

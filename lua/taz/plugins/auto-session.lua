@@ -2,16 +2,14 @@ return {
   {
     'rmagatti/auto-session',
     lazy = false,
-    dependencies = {
-      'nvim-telescope/telescope.nvim', -- Only needed if you want to use sesssion lens
-    },
+    dependencies = {},
 
     init = function()
-      vim.keymap.set('n', '<leader>St', '<cmd>SessionToggleAutoSave<cr>', { desc = 'Session | Toggle', silent = true })
-      vim.keymap.set('n', '<leader>SS', '<cmd>SessionSearch<cr>', { desc = 'Session | Search', silent = true })
-      vim.keymap.set('n', '<leader>Sd', '<cmd>SessionDelete<cr>', { desc = 'Session | Delete', silent = true })
-      vim.keymap.set('n', '<leader>Sr', '<cmd>SessionRestore<cr>', { desc = 'Session | Restore', silent = true })
-      vim.keymap.set('n', '<leader>Ss', '<cmd>SessionSave<cr>', { desc = 'Session | Save', silent = true })
+      vim.keymap.set('n', '<leader>St', '<cmd>AutoSession toggle<cr>', { desc = 'Session Toggle', silent = true })
+      vim.keymap.set('n', '<leader>SS', '<cmd>AutoSession search<cr>', { desc = 'Session Search', silent = true })
+      vim.keymap.set('n', '<leader>Sd', '<cmd>AutoSession delete<cr>', { desc = 'Session Delete', silent = true })
+      vim.keymap.set('n', '<leader>Sr', '<cmd>AutoSession restore<cr>', { desc = 'Session Restore', silent = true })
+      vim.keymap.set('n', '<leader>Ss', '<cmd>AutoSession save<cr>', { desc = 'Session Save', silent = true })
     end,
 
     ---enables autocomplete for opts
@@ -23,6 +21,7 @@ return {
       -- log_level = 'debug',
       show_auto_restore_notif = true,
       session_lens = {
+        picker = 'snacks',
         previewer = true,
       },
     },
