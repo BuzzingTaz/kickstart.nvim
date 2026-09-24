@@ -29,6 +29,7 @@ return {
       },
     },
     input = { enabled = true },
+    lazygit = { enabled = true },
     picker = {
       enabled = true,
       layout = {
@@ -180,6 +181,13 @@ return {
     },
 
     -- Git
+    {
+      '<leader>gg',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'Lazygit',
+    },
     {
       '<leader>gb',
       function()
