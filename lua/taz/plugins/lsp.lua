@@ -59,16 +59,17 @@ return {
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
           -- [[ Keymaps ]]--
+          -- Override default keymaps with telescope
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('glr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gli', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('glt', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('gln', vim.lsp.buf.rename, '[R]ename')
-          map('gla', vim.lsp.buf.code_action, 'code [A]ction', { 'n', 'x' })
-          map('glk', vim.diagnostic.open_float, 'code Diagnostic')
+          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('grt', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          -- map('grn', vim.lsp.buf.rename, '[R]ename')
+          -- map('gra', vim.lsp.buf.code_action, 'code [A]ction', { 'n', 'x' })
+          map('grk', vim.diagnostic.open_float, 'code Diagnostic')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
-          map('<C-space>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
+          map('<C-S-space>', vim.lsp.buf.signature_help, 'Signature Help', { 'n', 'i' })
 
           -- [[ Highlighting ]]--
           -- Highlights hovered symbol

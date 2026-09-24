@@ -23,7 +23,6 @@ return {
     signature = { enabled = true, window = { border = 'single' } },
     keymap = {
       preset = 'default',
-      ['<C-space>'] = false,
       ['<C-s>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = {},
     },
