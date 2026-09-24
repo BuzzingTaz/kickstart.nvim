@@ -5,7 +5,7 @@ return {
   dependencies = {
     'rafamadriz/friendly-snippets',
     'echasnovski/mini.snippets',
-    'fang2hou/blink-copilot',
+    -- 'fang2hou/blink-copilot',
     'folke/lazydev.nvim',
     { 'L3MON4D3/LuaSnip', version = 'v2.*', opts = {} },
   },
@@ -36,15 +36,15 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer'},
       providers = {
         lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-        copilot = {
-          name = 'copilot',
-          module = 'blink-copilot',
-          score_offset = 100,
-          async = true,
-        },
+        -- copilot = {
+        --   name = 'copilot',
+        --   module = 'blink-copilot',
+        --   score_offset = 100,
+        --   async = true,
+        -- },
       },
     },
 
